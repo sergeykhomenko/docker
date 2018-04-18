@@ -1,17 +1,23 @@
 # Docker runner
 
+
 # build containers
-# apache
-docker build -t docker-workspace-apache -f build/apache/Dockerfile .
+if [ "$1" = "--build" ]
+	then
 
-# php
-docker build -t docker-workspace-php -f build/php/Dockerfile .
+	# apache
+	docker build -t docker-workspace-apache -f build/apache/Dockerfile .
 
-# mysql
-docker build -t docker-workspace-mysql -f build/mysql/Dockerfile .
+	# php
+	docker build -t docker-workspace-php -f build/php/Dockerfile .
+
+	# mysql
+	docker build -t docker-workspace-mysql -f build/mysql/Dockerfile .
+
+	# phpMyAdmin
+	docker build -t docker-pma -f build/phpMyAdmin/Dockerfile .
+
+fi
 
 # Running the containers
-
-# run apache 2.4
-# ports: 80 -> 8080
-docker run -dit --name my-apache-app -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4
+./run.sh
